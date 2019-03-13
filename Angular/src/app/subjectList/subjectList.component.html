@@ -1,0 +1,73 @@
+<header-general-component></header-general-component>
+
+<div class="mt-5">&nbsp;</div>
+<nav class="breadcrumb">
+    <span class="breadcrumb-item active">{{course?.name}}/</span>
+</nav>
+<!-- Subjects list-->
+<section>
+    <div class="container">
+
+        <div class="list-title mt-1">
+            <h2>Subjects:</h2>
+        </div>
+
+        <div *ngFor="let subject of course?.subjects; let subI = index">
+
+            <a [routerLink]="['/moodle/',course?.internalName, subject?.internalName]" class="subject m-2 col-lg-10 col-md-10 col-sm-10 col-xs-10  btn btn-link row text-left border pl-5"
+                role='button'>
+                <span class="subject-name pt-2">{{subject?.name}}</span>
+            </a>
+
+
+
+            <div *ngIf="loginService.isAdmin" class="row">
+                <div class="col-md-4">
+
+                    <label>Rename: </label>
+                    <input type="text" placeholder="{{subject?.name}}" name="subjectName" #newName>
+                    <label>Description: </label>
+                    <textarea class="form-control" id="exampleTextarea" #newDescription name="description" rows="3">{{subject?.description}}</textarea>
+                    <button (click)="changeSubjectInformation(subject, newName.value, newDescription.value)">Confirm</button>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="col-md-4">Teachers: </label>
+                    <select class="col-md-8" size="3" multiple="multiple" tabindex="1">
+                        <option disabled="true"> Teaching:</option>
+                        <option *ngFor="let teacher of subject?.teachers" value="11" disabled="true">{{teacher?.username}}</option>
+                    </select>
+
+                    <select multiple class="col-md-8" size="" tabindex="1" #selectedTeachersArr (change)="setSelected($event.target, subI)">
+                        <option *ngFor="let teacherS of allTeachers" [(value)]="teacherS.username">{{teacherS?.username}}</option>
+                    </select>
+                    <button class="col-md-3" (click)="changeTeachers(subI)">Save</button>
+                </div>
+
+
+                <div class="col-md-2">
+
+                    <button (click)="deleteSubject(subject)">Delete Subject</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div></div>
+        <div *ngIf="loginService.isAdmin" class="mt-4 subject">
+            <h4>
+                <label>New Subject: </label>
+                <input type="text" class="col-md-5" #subjectName>
+                <button class="form-controll" (click)="createSubject(subjectName.value)">Create</button>
+
+            </h4>
+        </div>
+
+        <!-- End Subjects -->
+
+    </div>
+
+</section>

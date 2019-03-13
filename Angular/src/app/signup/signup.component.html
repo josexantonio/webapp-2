@@ -1,0 +1,38 @@
+<header-general-component></header-general-component>
+
+<section class="login-block">
+  <div class="container login mt-3">
+    <h3 class="text-center">Sign Up Now</h3>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 login-sec" align=center>
+          <div class="form-group">
+            <label class="text-uppercase">username</label>
+            <input #username name="username" type="text" class="col-lg-8 text-center form-control" placeholder="John_Smith85">
+          </div>
+          <div class="form-group">
+            <label class="text-uppercase">email</label>
+            <input #mail name="userMail"  email="true" type="text" class="col-lg-8  text-center  form-control" placeholder="johnsmith@hotmail.com">
+            <div *ngIf="mail.errors?.email">
+              Email not valid.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="text-uppercase">password</label>
+            <input #pass name="password" type="password" class="col-lg-8  text-center form-control" placeholder="">
+          </div>
+          <div class="form-group">
+            <label class="text-uppercase">repeat password</label>
+            <input #Rpass name="repeatPassword" type="password" class="col-lg-8  text-center form-control" placeholder="">
+          </div>
+          <div *ngIf="errorSign">
+            <p style="color:red">{{valError}}, try again</p>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 form-check">
+            <button type="submit" (click)="checkUM($event, username.value, mail.value, pass.value, Rpass.value)" class="btn btn-login float-right">Sign Up!</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>

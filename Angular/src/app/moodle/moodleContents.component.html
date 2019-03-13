@@ -1,0 +1,63 @@
+<span class="pl-3 py-1 tab-title"> Contents:</span>
+<ngb-tabset justify="fill">
+    <ngb-tab *ngFor="let module of modules; let i = index" title="Mod {{i+1}}">
+        <ng-template ngbTabContent>
+            <span *ngIf="!loginService.isStudent" class="offset-md-10" (click)="deleteModule(i)">
+                <a class="btn btn-warning"> Delete Module {{i+1}} </a>
+            </span>
+            <!-- Students -->
+            <span *ngIf="loginService.isStudent">
+                <a *ngFor="let studyItem of studyItems[i]" class="item-content" (click)="getStudyItemFile(studyItem)">
+                    <li class="list-group-item">
+                        <span class="item-icon fa fa-{{studyItem?.type}}-o pl-5"></span> {{studyItem?.name}}</li>
+                </a>
+            </span>
+
+            <!-- Teachers -->
+            <span *ngIf="!loginService.isStudent">
+
+                <li *ngFor="let studyItem of studyItems[i]; let j = index" class="list-group-item">
+                    <span class="row">
+                        <a class="item-content col-md-2" (click)="getStudyItemFile(studyItem)">
+                            <span>{{j+1}}.- </span>
+                            <span class="item-icon fa fa-{{studyItem?.type}}-o pl-3 pr-3"></span>{{studyItem?.name}}
+                        </a>
+                        <span class="col-md-10">
+                            <div class="row">
+                                <label class="mx-1">Rename: </label>
+                                <input class="form-control col" type="text" #newName value="{{studyItem.name}}">
+                                <label class="ml-1"> Icon: </label>
+                                <input class="form-control col-md-1" type="text" #newType size="2" value="{{studyItem.icon}}">
+                                <label class="ml-1 col-md-4 text-left">File : {{studyItem?.originalName}} </label>
+                                <button class="ml-1" name="btnSave" (click)="modifyStudyItem(newName.value, newType.value, i, j)"> Save </button>
+                                <button class="ml-1" name="btnDelete" (click)="deleteStudyItem(i, j)"> Delete </button>
+                            </div>
+                        </span>
+                    </span>
+
+
+                </li>
+
+                <li class="item-content list-group-item col-12">
+                    <span class="col-12">
+                        <label class="col-md-1">New:</label>
+                        <input class="col-md-2" type="text" #itemName placeholder="Name:">
+                        <input class="col-md-3" type="text" #itemType placeholder="Icon: (pdf, word, video...)">
+                        <input class="col-md-4" type="file" #itemFile>
+                        <button class="col-md-1" (click)="createStudyItem(itemName.value, itemType.value, itemFile, i)">Create</button>
+                    </span>
+                </li>
+
+            </span>
+
+
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab *ngIf="!loginService.isStudent" id="newMod">
+        <ng-template ngbTabTitle>
+            <div (click)="createModule()" >New Mod +</div>
+        </ng-template>
+    </ngb-tab>
+
+</ngb-tabset>

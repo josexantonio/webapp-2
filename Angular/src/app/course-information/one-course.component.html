@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="./">AMICOURSES</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/oneCourse', id]" routerLinkActive="active">Description</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/oneCourse', id, 'skills']" routerLinkActive="active">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/oneCourse', id, 'subjects']" routerLinkActive="active">Subjects</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" [ngStyle]="{'background-image': 'url(https://localhost:8443/courses/img/' + id + ')'}">
+  <div class="overlay"></div>
+  <!--<div class="container"> -->
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>{{course.name}}</h1>
+          <span class="subheading">A course to learn...</span><br>
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+              <tr>
+                <td>  From </td>
+                <td>{{course.startDateString}}</td>
+                <td>  To  </td>
+                <td>{{course.endDateString}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row" id=courseInformation>
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="post-preview">
+        <h2 class="post-title">
+          Description
+        </h2>
+        <div class="course-description" *ngIf="course">
+          <p class="post-subtitle">{{course.courseDescription}}</p>
+          <a  *ngIf="loginService.isLogged && loginService.isStudent" [routerLink]="['/oneCourse', id, 'add']" class="btn btn-info">Add Course</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-course-information-footer></app-course-information-footer>
+<br>
+<!--
+{{#error}}
+
+<div class="col-xs-12 col-sm-12 col-md-12 " align=center>
+  <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="alert.message">
+    <strong> <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert></strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+{{/error}}
+
+-->

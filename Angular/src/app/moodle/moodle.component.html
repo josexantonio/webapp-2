@@ -1,0 +1,94 @@
+<header-general-component></header-general-component>
+
+<br>
+<div class="mt-5"> </div>
+<nav class="breadcrumb">
+    <a [routerLink]="['/course-overview/',courseName]" class="breadcrumb-item">{{courseName}}</a>
+    <span class="breadcrumb-item active">{{subjectName}}</span>
+</nav>
+
+<section>
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-9 col-12" id="contents-tab">
+                <ngb-tabset justify="fill" (tabChange)="getContents($event)" [destroyOnHide]="false">
+
+                    <!-- Contents -->
+                    <ngb-tab id="contents" title="Contents">
+                        <ng-template ngbTabContent>
+
+                            <moodle-contents-component [courseName]='courseName' [subjectName]='subjectName' (refreshSubject)="generatePage()"></moodle-contents-component>
+
+                        </ng-template>
+                    </ngb-tab>
+
+                    <!-- Evaluation  -->
+                    <ngb-tab id="evaluation" title="Evaluation" >
+                        <ng-template ngbTabContent>
+                                <moodle-evaluation-component [courseName]='courseName' [subjectName]='subjectName'></moodle-evaluation-component>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="progress" title="Progress">
+                        <ng-template ngbTabContent>
+                            <moodle-progress-component [courseName]='courseName' [subjectName]='subjectName'></moodle-progress-component>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab id="teachers" title="{{teachersPanel}}">
+                        <ng-template ngbTabContent>
+                                <span class="pl-3 py-1 tab-title"> {{teachersPanel}}</span>
+
+                            <ul class="list-group">
+                                    
+                                        <!-- Item -->
+                                        <a *ngFor="let user of listUsers" class="item-content" class="nav-link" [routerLink]="['/users',user.internalName,'profile']">
+                                            <li class="list-group-item">
+                                            <img class="img-fluid img-profile rounded-circle mx-auto mb-2 offset-md-2" style="width:64px;height:64px" src="{{URL}}/profileimg/{{user.internalName}}" alt="profileImg"> 
+                                            <span class = "ml-5">User : {{user.username}}</span> 
+                                            </li>
+                                        </a>
+                                        
+                                    </ul>
+                        </ng-template>
+                    </ngb-tab>
+
+                </ngb-tabset>
+            </div>
+
+            <!-- Mail and forum tab -->
+            <div class="col" id="lateral-pane">
+                <!-- Mail -->
+                <div class="border text-center lateral-item">
+                    <h3 class="border-bottom">Mail</h3>
+                    <div class="my-3 offset-2 mr-5" role="tablist">
+                        <a class="border btn nav nav-link" id="open-mail"> Open Mail</a>
+                    </div>
+
+
+                </div>
+                <!-- Forum -->
+                <div class="border mt-5 text-center lateral-item">
+                    <h3 class="border-bottom">Forum</h3>
+                    <!-- Formun Announcements -->
+                    <div class="my-3 offset-2 mr-5 p-1 border">
+                        <p class="mb-2">Announcements</p>
+                        <a class="border btn nav nav-link">
+                            Enter</a>
+                    </div>
+                    <!-- Forum Questions -->
+                    <div class="my-3 offset-2 mr-5 p-1 border">
+                        <p class="mb-2">Questions</p>
+                        <a class="border btn nav nav-link"> Enter</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</section>
