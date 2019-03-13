@@ -41,8 +41,6 @@ export class UserComponent implements OnInit {
       res => { },
     );
 
-    this.service.getImageProfile(this.internalName).subscribe(photo => this.image = photo,
-      error => console.log(error));
     this.service.getUser(this.internalName).subscribe(user => { this.user = user, console.log(this.user); },
       error => console.log(error));
 

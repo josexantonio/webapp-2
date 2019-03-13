@@ -75,7 +75,7 @@ public class UserService {
 					u.setInternalName(username.replaceAll(" ", "-").toLowerCase());
 				}
 			if (password != null && !password.isEmpty())
-				u.setPassword(password);
+				u.setPasswordCrypt(password);
 
 			/*
 			 * if ((password != null) && (repeatPassword != null)) if

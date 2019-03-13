@@ -245,6 +245,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public void setPasswordCrypt(String password) {
+		this.setPassword(new BCryptPasswordEncoder().encode(password));
+	}
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
