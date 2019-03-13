@@ -110,7 +110,7 @@
                 </div>
 
                 <div *ngIf="loginService?.user?.userID==user?.userID" class = 'col-2 offset-5  offset-lg-0 col-lg-2 col-sm-2 mb-1'>
-                  <a [routerLink]="['/profile/', internalName, '/certificate/', user.internalName-user.userID]" class = 'btn btn-primary fa fa-file-pdf' role = 'button'> Certificate</a>
+                  <a (click)="dowloadPDF(course?.internalName)" class = 'btn btn-primary fa fa-file-pdf' role = 'button'> Certificate</a>
                 </div>
 
               </div>
