@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ChartsModule } from 'ng2-charts';
@@ -37,7 +37,7 @@ import { AdminHeaderComponent } from './admin/adminHeader.component';
 import { AdminTablesComponent } from './admin/adminTables.component';
 import {AdminTeacherComponent} from './admin/adminTeacher.component';
 import {AdminCourseComponent} from './admin/adminCourse.component';
-
+import { XMLRequestInterceptor } from "./http-interceptor/xmlrequest-interceptor";
 
 @NgModule({declarations: [AppComponent, FooterComponent, OneCourseComponent,
                           SkillsComponent, SubjectsComponent, IndexPageComponent, HeaderGeneralComponent,
@@ -47,7 +47,12 @@ import {AdminCourseComponent} from './admin/adminCourse.component';
                           AdminTablesComponent, AdminCourseComponent, AdminTeacherComponent],
   imports: [BrowserModule, routing, HttpClientModule,  HttpModule  , NgbModule.forRoot(), AngularFontAwesomeModule, ChartsModule,
     FormsModule],
-  providers: [CourseService, LoginService, MoodleService, UserService, SubjectListService],
+  providers: [CourseService, LoginService, MoodleService, UserService, SubjectListService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XMLRequestInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
