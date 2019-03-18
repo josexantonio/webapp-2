@@ -54,7 +54,9 @@ export class SubjectListComponent implements OnInit {
           }
         });
         if (!isInscribed) {
-          this.router.navigate(['/error', '401']); //Forbidden
+          if(!this.loginService.isAdmin()){
+            this.router.navigate(['/error', '401']); //Forbidden
+          }
         } 
         
         if (!this.loginService.isStudent && !this.loginService.isAdmin) {

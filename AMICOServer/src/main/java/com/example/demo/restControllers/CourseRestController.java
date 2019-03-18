@@ -244,8 +244,6 @@ public class CourseRestController {
 			@PathVariable(required = false) String internalName) {
 		if (!sessionUserComponent.isLoggedUser())
 			return new ResponseEntity<>(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
-		else if (!sessionUserComponent.getLoggedUser().isAdmin())
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		else {
 			Course deletedCourse;
 			if (internalName == null)

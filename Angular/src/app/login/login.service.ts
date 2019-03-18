@@ -11,8 +11,6 @@ const URL = 'https://localhost:8443/api';
 export class LoginService {
 
     isLogged = false;
-    isAdmin = false;
-    isStudent;
     user: User;
 
     constructor(private http: Http, private router: Router) {
@@ -49,11 +47,17 @@ export class LoginService {
         return this.http.get(URL + '/logIn', options);
     }
 
+    isStudent(): boolean{
+        return this.user.student;
+    }
+
+    isAdmin(): boolean {
+        return (this.user.roles.indexOf('ROLE_ADMIN') !== -1);
+    }
+
     private processLogInResponse(response) {
         this.isLogged = true;
         this.user = response.json();
-        this.isAdmin = this.user.roles.indexOf('ROLE_ADMIN') !== -1;
-        this.isStudent = this.user.student;
     }
 
     logIn(user: string, pass: string) {
