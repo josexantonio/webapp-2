@@ -12,7 +12,7 @@ import { LoginService } from '../login/login.service';
 @Component({
   selector: 'admin-course-component',
   templateUrl: './adminCourse.component.html',
-  styleUrls: ['../../assets/css/sb-admin.css']
+  styleUrls: ['../../assets/css/sb-admin.css', './style.css']
 })
 
 export class AdminCourseComponent {

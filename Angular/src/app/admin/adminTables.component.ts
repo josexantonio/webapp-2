@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 @Component({
   selector: 'admin-tables-component',
   templateUrl: './adminTables.component.html',
-  styleUrls: ['../../assets/css/sb-admin.css']
+  styleUrls: ['../../assets/css/sb-admin.css', './style.css']
 })
 
 export class AdminTablesComponent implements OnInit {

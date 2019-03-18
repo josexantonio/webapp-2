@@ -10,7 +10,7 @@ import {environment} from '../../environments/environment';
 @Component({
   selector: 'admin-teacher-component',
   templateUrl: './adminTeacher.component.html',
-  styleUrls : ['../../assets/css/sb-admin.css']
+  styleUrls : ['../../assets/css/sb-admin.css', './style.css']
 })
 
 export class AdminTeacherComponent {
