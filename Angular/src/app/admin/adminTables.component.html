@@ -27,18 +27,19 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let course of courses">
+                  <tr *ngFor="let course of courses; let i = index">
                       <td >
                         <div class="img-container"><img class="rounded-circle" src="{{imageURL}}/courses/img/{{course.courseID}}"></div>
+                        <input type="file" name="coruseImage{{i}}">
                       </td>
                       <td contenteditable="true"><input type = "text" #newName size = "20"value = "{{course.name}}" name = "newName"> </td>
                       <td contenteditable="true"><input type = "text" #newLanguage size = "10" value = "{{course.courseLanguage}}" name = "newLanguage"> </td>
                       <td contenteditable="true"><input type = "text" #newType size = "20"value = "{{course.type}}" name = "newType"> </td>
                       <td contenteditable="true"><label size = "2"> {{course.startDateString}}</label></td>
                       <td contenteditable="true"><label size = "30">{{course.endDateString}}</label></td>
-                      <td contenteditable="true"><input type = "text" #newDescription size = "50" value = "{{course.courseDescription}}" name = "newDescription"></td>
+                      <td contenteditable="true"><input type = "text" #newDescription   size = "50" value = "{{course.courseDescription}}" name = "newDescription"></td>
                       <td><a class = "btn btn-primary" [routerLink] = "['/course-overview',course.internalName]">Enter</a> </td>
-                      <td> <button type = "button" (click)="modifyCourse(newName.value, newLanguage.value, newType.value, newDescription.value, course)" name = "btnSave" >Save</button> </td>
+                      <td> <button type = "button" (click)="modifyCourse(course.courseID, newName.value, newLanguage.value, newType.value, newDescription.value, course, i)" name = "btnSave" >Save</button> </td>
                       <td> <button type = "button" (click)="deleteCourse(course.internalName)" name = "btnDelete">Delete</button> </td>
                   </tr>
                   </tbody>

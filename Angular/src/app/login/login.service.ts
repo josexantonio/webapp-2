@@ -88,8 +88,6 @@ export class LoginService {
 
         return this.http.get(URL + '/logOut', { withCredentials: true }).map(
             response => {
-                this.isLogged = false;
-                this.isAdmin = false;
                 return response;
             }
         );
