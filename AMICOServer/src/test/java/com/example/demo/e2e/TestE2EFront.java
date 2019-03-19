@@ -64,7 +64,7 @@ public class TestE2EFront extends TestE2E{
 		image.sendKeys(imageUpload);
 		submit.click();
 		
-		browser.waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className("table-responsive")), "Failed creating course", 2);
+		browser.waitUntil(ExpectedConditions.visibilityOfElementLocated(By.id("dataTable1")), "Failed creating course", 2);
 		log.info("Course created correctly");
 		
 		//Go to last courses
@@ -74,30 +74,43 @@ public class TestE2EFront extends TestE2E{
 		lastPageCourses.click();
 		
 		//Select last course
-		divTable = browser.getDriver().findElement(By.className("table-responsive"));
-		List<WebElement> trsTable = divTable.findElements(By.tagName("tr"));
-		WebElement lastCourse = trsTable.get(trsTable.size() - 1);
-		
-		List<WebElement> inputsLastCourse = lastCourse.findElements(By.tagName("input")); 
-		List<WebElement> buttonsLastCourse = lastCourse.findElements(By.tagName("button"));
-		WebElement buttonDeleteLastCourse = buttonsLastCourse.get(buttonsLastCourse.size() - 1);
-		String nameLastCourse = inputsLastCourse.get(0).getAttribute("value");
-		
+		WebElement lastCourse = getLastCourse();
+		WebElement inputName = lastCourse.findElement(By.name("newName"));
+		WebElement buttonDeleteLastCourse = lastCourse.findElement(By.name("btnDelete"));
+		String nameLastCourse = inputName.getAttribute("value");
+				
 		//Check if the last course is equals than course added and delete it
 		assertThat("Failed adding course", nameLastCourse, IsEqualIgnoringCase.equalToIgnoringCase("test"));
 		buttonDeleteLastCourse.click();
 		
+		//Wait remove course
+		sleep(500);
+		
 		//Check if the course is deleted
-		divTable = browser.getDriver().findElement(By.className("table-responsive"));
-		trsTable = divTable.findElements(By.tagName("tr"));
-		lastCourse = trsTable.get(trsTable.size() - 1);
-		inputsLastCourse = lastCourse.findElements(By.tagName("input"));
-		nameLastCourse = inputsLastCourse.get(0).getAttribute("value");
+		lastCourse = getLastCourse();
+		inputName = lastCourse.findElement(By.name("newName"));
+		nameLastCourse = inputName.getAttribute("value");
 		
 		assertThat("Failed deleting course", nameLastCourse, not(IsEqualIgnoringCase.equalToIgnoringCase("test")));
 		log.info("Course deleted correctly");
 		
 		this.browser.goToPage();
     	this.logout(browser);
+    }
+    
+    private WebElement getLastCourse() {
+    	WebElement divTable = browser.getDriver().findElement(By.id("dataTable1"));
+    	List<WebElement> trsTable = divTable.findElements(By.tagName("tr"));
+    	WebElement lastCourse = trsTable.get(trsTable.size() - 1);
+    	
+    	return lastCourse;
+    }
+    
+    private void sleep(int time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
 }
