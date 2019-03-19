@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ import com.example.demo.user.UserRepository;
 @Order(1)
 public class DataLoaderExample {
 
+	private static final Logger log = LoggerFactory.getLogger(DataLoaderExample.class);
+	
 	@Autowired
 	private CourseRepository courseRepository;
 	@Autowired
@@ -50,6 +55,15 @@ public class DataLoaderExample {
 
 	@PostConstruct
 	public void init() {
+		if (courseRepository.findOne(1L) == null) {
+			log.info("Loading data in BBDD");
+			loadData();
+		} else {
+			log.info("The data are already loaded in the bbdd");
+		}
+	}
+
+	public void loadData() {
 
 		List<Course> courses = new ArrayList<>();
 
@@ -159,7 +173,6 @@ public class DataLoaderExample {
 		users.add(new User("amicoTeacher4", "pass", "amicoTeacher4@mail.com", false));
 		users.add(new User("amicoTeacher5", "pass", "amicoTeacher5@mail.com", false));
 		users.add(new User("amicoTeacher6", "pass", "amicoTeacher6@mail.com", false));
-		
 
 		courses.get(0).getInscribedUsers().add(users.get(50));
 		users.get(50).getInscribedCourses().add(courses.get(0));
@@ -186,7 +199,7 @@ public class DataLoaderExample {
 		users.get(51).getInscribedCourses().add(courses.get(4));
 		courses.get(5).getInscribedUsers().add(users.get(51));
 		users.get(51).getInscribedCourses().add(courses.get(5));
-		
+
 		courses.get(0).getInscribedUsers().add(users.get(52));
 		users.get(52).getInscribedCourses().add(courses.get(0));
 		courses.get(1).getInscribedUsers().add(users.get(52));
@@ -225,12 +238,12 @@ public class DataLoaderExample {
 		subjects.get(4).getTeachers().add(users.get(51));
 
 		subjects.get(0).getTeachers().add(users.get(52));
-		//subjects.get(0).getTeachers().add(users.get(53));
+		// subjects.get(0).getTeachers().add(users.get(53));
 		subjects.get(1).getTeachers().add(users.get(52));
 
 		users.get(51).getTeaching().add(subjects.get(0));
 		users.get(52).getTeaching().add(subjects.get(0));
-		//users.get(53).getTeaching().add(subjects.get(0));
+		// users.get(53).getTeaching().add(subjects.get(0));
 		users.get(51).getTeaching().add(subjects.get(1));
 		users.get(52).getTeaching().add(subjects.get(1));
 		users.get(51).getTeaching().add(subjects.get(2));
@@ -250,7 +263,7 @@ public class DataLoaderExample {
 		// users.get(50).getCompletedCourses().addAll(completed);
 
 		courseRepository.save(courses);
-		
+
 		userRepository.save(users);
 
 		/*
