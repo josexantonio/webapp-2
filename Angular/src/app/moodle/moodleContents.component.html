@@ -7,7 +7,7 @@
             </span>
             <!-- Students -->
             <span *ngIf="loginService.isStudent">
-                <a *ngFor="let studyItem of studyItems[i]" class="item-content" (click)="getStudyItemFile(studyItem)">
+                <a *ngFor="let studyItem of studyItems[i]" class="item-content" (click)="getStudyItemFile(stdyItem)">
                     <li class="list-group-item">
                         <span class="item-icon fa fa-{{studyItem?.type}}-o pl-5"></span> {{studyItem?.name}}</li>
                 </a>
@@ -18,7 +18,7 @@
 
                 <li *ngFor="let studyItem of studyItems[i]; let j = index" class="list-group-item">
                     <span class="row">
-                        <a class="item-content col-md-2" (click)="getStudyItemFile(studyItem)">
+                        <a class="item-content col-md-2" (click)="getStudyItemFile(stdyItem)">
                             <span>{{j+1}}.- </span>
                             <span class="item-icon fa fa-{{studyItem?.type}}-o pl-3 pr-3"></span>{{studyItem?.name}}
                         </a>
@@ -42,8 +42,8 @@
                     <span class="col-12">
                         <label class="col-md-1">New:</label>
                         <input class="col-md-2" type="text" #itemName placeholder="Name:">
-                        <input class="col-md-3" type="text" #itemType placeholder="Icon: (pdf, word, video...)">
-                        <input class="col-md-4" type="file" #itemFile>
+                        <input class="col-md-3" type="text" value="{{typeFile}}" #itemType placeholder="Icon: (pdf, word, video...)">
+                        <input class="col-md-4" type="file" (change)="addedFile(itemFile)" #itemFile>
                         <button class="col-md-1" (click)="createStudyItem(itemName.value, itemType.value, itemFile, i)">Create</button>
                     </span>
                 </li>

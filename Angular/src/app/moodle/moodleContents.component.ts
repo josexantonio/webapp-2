@@ -7,6 +7,7 @@ import { Subject } from '../model/subject.model';
 import { MoodleService } from './moodle.service';
 import { LoginService } from '../login/login.service';
 import { Studyitem } from '../model/studyitem.model';
+import { pbkdf2 } from 'crypto';
 
 
 
@@ -33,6 +34,7 @@ export class MoodleContentsComponent {
   private studyItems: Studyitem[][];
   private studyItemsPage: number[];
   private studyItemsisLast: boolean[];
+  private typeFile: string = "";
 
   @Output()
   refreshSubject = new EventEmitter<any>();
@@ -119,6 +121,26 @@ export class MoodleContentsComponent {
       alert("There are empty parameters");
     }
   }
+
+  public addedFile(inputFile){
+    let file = inputFile.files[0];
+    this.typeFile = this.typeOfFile(file.name, file.type);
+  }
+
+  private typeOfFile(name: string, type: string){
+    if(type.includes("text")){
+      return "text";
+    } else if(type.includes("image")){
+      return "image";
+    } else if(type.includes("openxmlformats")){
+      return "word";
+    } else if(type.includes("pdf")){
+      return "pdf";
+    } else if(type.includes("video")){
+      return "video";
+    }
+  }
+
 
   deleteModule(module: number) {
     this.moodleService.deleteModule(this.courseName, this.subjectName, module+1).subscribe(
