@@ -150,7 +150,7 @@ public class TestE2EFront extends TestE2E {
 		firstSubject.click();
 
 		// Download
-		browser.waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className("container-fluid ")),
+		browser.waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className("container-fluid")),
 				"Failed opening subject", 2);
 		List<WebElement> files = browser.getDriver().findElements(By.className("item-content"));
 		WebElement firstFile = files.get(0);
