@@ -10,7 +10,7 @@
 <section>
     <div class="container-fluid ">
         <div class="row">
-            <div class="col-md-9 col-12" id="contents-tab">
+            <div class="col-12" id="contents-tab">
                 <ngb-tabset justify="fill" (tabChange)="getContents($event)" [destroyOnHide]="false">
 
                     <!-- Contents -->
@@ -55,35 +55,6 @@
 
                 </ngb-tabset>
             </div>
-
-            <!-- Mail and forum tab -->
-            <div class="col" id="lateral-pane">
-                <!-- Mail -->
-                <div class="border text-center lateral-item">
-                    <h3 class="border-bottom">Mail</h3>
-                    <div class="my-3 offset-2 mr-5" role="tablist">
-                        <a class="border btn nav nav-link" id="open-mail"> Open Mail</a>
-                    </div>
-
-
-                </div>
-                <!-- Forum -->
-                <div class="border mt-5 text-center lateral-item">
-                    <h3 class="border-bottom">Forum</h3>
-                    <!-- Formun Announcements -->
-                    <div class="my-3 offset-2 mr-5 p-1 border">
-                        <p class="mb-2">Announcements</p>
-                        <a class="border btn nav nav-link">
-                            Enter</a>
-                    </div>
-                    <!-- Forum Questions -->
-                    <div class="my-3 offset-2 mr-5 p-1 border">
-                        <p class="mb-2">Questions</p>
-                        <a class="border btn nav nav-link"> Enter</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
