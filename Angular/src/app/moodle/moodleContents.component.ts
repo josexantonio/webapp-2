@@ -1,17 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Course } from '../model/course.model';
-import { CourseService } from '../course-information/course.service';
-import { environment } from '../../environments/environment';
-import { Subject } from '../model/subject.model';
 import { MoodleService } from './moodle.service';
 import { LoginService } from '../login/login.service';
 import { Studyitem } from '../model/studyitem.model';
-import { pbkdf2 } from 'crypto';
-
-
-
-
 
 @Component({
   selector: 'moodle-contents-component',
@@ -19,11 +10,7 @@ import { pbkdf2 } from 'crypto';
   styleUrls: ['../../assets/css/student-subject.css']
 })
 
-
-
 export class MoodleContentsComponent {
-
-
 
   @Input()
   private subjectName: string;
