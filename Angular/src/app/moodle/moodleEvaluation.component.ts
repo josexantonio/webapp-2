@@ -10,17 +10,11 @@ import { Studyitem } from '../model/studyitem.model';
 import { saveAs as importedSaveAs } from "file-saver";
 import { Practices } from '../model/practices.model';
 
-
-
-
-
 @Component({
   selector: 'moodle-evaluation-component',
   templateUrl: './moodleEvaluation.component.html',
-  styleUrls: ['../../assets/css/student-subject.css']
+  styleUrls: ['../../assets/css/student-subject.css', './style.css']
 })
-
-
 
 export class MoodleEvaluationComponent implements OnInit {
 
@@ -34,6 +28,10 @@ export class MoodleEvaluationComponent implements OnInit {
 
   private hasMoreSubmissions: boolean[];
   private isLastPractice: boolean;
+
+  public message: string = "";
+  public succesAlert: boolean = false;
+  public dangerAlert: boolean = false;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, private loginService: LoginService, private moodleService: MoodleService) {
 
@@ -72,16 +70,16 @@ export class MoodleEvaluationComponent implements OnInit {
     );
   }
 
-  modifyPractice(practice : Studyitem, name : string, type : string){
+  modifyPractice(practice: Studyitem, name: string, type: string) {
     practice.name = name;
     practice.icon = type;
-      this.moodleService.modifyStudyItem(this.courseName, this.subjectName, practice).subscribe(
-        res => {this.getPractices()},
-        error => this.loginService.errorHandler(error),
-      );
+    this.moodleService.modifyStudyItem(this.courseName, this.subjectName, practice).subscribe(
+      res => { this.getPractices() },
+      error => this.loginService.errorHandler(error),
+    );
   }
 
-  deletePractice(practice : Studyitem) {
+  deletePractice(practice: Studyitem) {
     this.moodleService.deleteStudyItem(this.courseName, this.subjectName, practice).subscribe(
       res => this.getPractices(),
       error => this.loginService.errorHandler(error),
@@ -122,28 +120,59 @@ export class MoodleEvaluationComponent implements OnInit {
   }
 
   savePracticeSubmission(name: string, file: any, index: number, practiceSub: number, update: boolean) {
-    if (file.files[0] && name.length > 0) {
-      let practiceSubmission = this.practices[index].practices[practiceSub];
-      practiceSubmission.practiceName = name;
-      this.moodleService.savePracticeSubmission(this.courseName, this.subjectName, this.practices[index], practiceSubmission).subscribe(
-        res => {
-          console.log(res);
+    let practiceSubmission = this.practices[index].practices[practiceSub];
+    practiceSubmission.practiceName = name;
+    this.moodleService.savePracticeSubmission(this.courseName, this.subjectName, this.practices[index], practiceSubmission).subscribe(
+      res => {
+        console.log(res);
+        if (file.files[0] && name.length > 0) {
           this.moodleService.uploadFile(this.courseName, this.subjectName, this.practices[index], file.files[0], res, update).subscribe(
-            res => { this.practices[index].practices[practiceSub] = res; },
+            res => { 
+              this.practices[index].practices[practiceSub] = res;
+              this.openPopUp("Fichero subido correctamente", "succesAlert"); 
+            },
             error => this.loginService.errorHandler(error),
           );
-        },
-        error => this.loginService.errorHandler(error),
-      );
+        } else {
+          this.openPopUp("Nombre modificado correctamente", "succesAlert");
+        }
+      },
+      error => this.loginService.errorHandler(error),
+    );
+  }
 
-    } else {
-      alert("There are empty parameters");
+  getPracticeSubmissionFile(practice: Studyitem, practiceSubmission: Practices) {
+    this.moodleService.downloadFile(this.courseName, this.subjectName, practice, practiceSubmission);
+  }
+
+  public openPopUp(message: string, type: string){
+    this.message = message;
+
+    switch(type){
+      case "succesAlert":
+        this.succesAlert = true;
+        break;
+      case "dangerAlert":
+        this.dangerAlert = true;
+        break;
+    }
+
+    setTimeout(() => {
+      this.succesAlert = false;
+      this.dangerAlert = false;
+      this.message = "";
+    }, 3000);
+  }
+
+  public closePopUp(type: string){
+    switch(type){
+      case "succesAlert":
+        this.succesAlert = false;
+        break;
+      case "dangerAlert":
+        this.dangerAlert = false;
+        break;
     }
   }
 
-  getPracticeSubmissionFile(practice : Studyitem, practiceSubmission: Practices){
-      this.moodleService.downloadFile(this.courseName, this.subjectName, practice, practiceSubmission);
-  }
-
-  
 }

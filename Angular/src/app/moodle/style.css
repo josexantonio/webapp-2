@@ -1,0 +1,8 @@
+.popup-message{
+    position:fixed; 
+    text-align: center;
+    bottom:-10px; 
+    left: 0.4em; 
+    right: 0.4em;
+    z-index: 1154 !important;
+}

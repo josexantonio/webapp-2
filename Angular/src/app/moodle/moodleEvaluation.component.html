@@ -19,8 +19,10 @@
                         <label class="ml-1 col-md-1"> Type: </label>
                         <input class="form-control col-md-1" type="text" #newType size="2" value={{practice.icon}}>
                         <label class="ml-1 col-md-col-md-4 text-left">File : {{practice.originalName}} </label>
-                        <button class="ml-1 col-md-1" (click) ="modifyPractice(practice, newName.value, newType.value)" name="btnSave" value="save"> Save </button>
-                        <button class="ml-1 col-md-1" (click)="deletePractice(practice)" name="btnDelete" value="delete"> Delete </button>
+                        <button class="ml-1 col-md-1" (click)="modifyPractice(practice, newName.value, newType.value)"
+                            name="btnSave" value="save"> Save </button>
+                        <button class="ml-1 col-md-1" (click)="deletePractice(practice)" name="btnDelete"
+                            value="delete"> Delete </button>
                     </div>
 
 
@@ -28,28 +30,34 @@
             </li>
             <!-- Every practice from every student -->
 
-            <li *ngFor="let practiceSubmission of practice.practices; let j = index" class="item-content list-group-item col-11 offset-1">
+            <li *ngFor="let practiceSubmission of practice.practices; let j = index"
+                class="item-content list-group-item col-11 offset-1">
                 <!-- Teacher -->
                 <span *ngIf="!loginService.isStudent" class="row ml-3">
                     <span class="col-md-2">Username : {{practiceSubmission?.owner.username}} </span>
                     <span class="col-md-3">File :
-                        <a class="item-content col-md-2" (click)="getPracticeSubmissionFile(practice, practiceSubmission)">{{practiceSubmission.practiceName}}</a>
+                        <a class="item-content col-md-2"
+                            (click)="getPracticeSubmissionFile(practice, practiceSubmission)">{{practiceSubmission.practiceName}}</a>
                     </span>
                     <span class="col-md-7">
                         <div class="form-inline">
                             <label class="mr-2">Calification: </label>
-                            <input class="form-control" type="number" #newCalification value="{{practiceSubmission.calification}}" min="0" max="10" step="any">
-                            <button class="ml-3" name="btnSave" value="save" (click)="modifyCalification(practice, practiceSubmission, newCalification.value, i, j)">
+                            <input class="form-control" type="number" #newCalification
+                                value="{{practiceSubmission.calification}}" min="0" max="10" step="any">
+                            <button class="ml-3" name="btnSave" value="save"
+                                (click)="modifyCalification(practice, practiceSubmission, newCalification.value, i, j)">
                                 Save </button>
                         </div>
                     </span>
                 </span>
 
                 <!-- Student -->
-                
+
                 <div *ngIf="loginService.isStudent" class="row">
                     <span *ngIf="practiceSubmission?.presented" class="col-md-2">File :
-                        <a class="item-content col-md-2" (click)="getPracticeSubmissionFile(practice, practiceSubmission)"> {{practiceSubmission?.practiceName}} </a>
+                        <a class="item-content col-md-2"
+                            (click)="getPracticeSubmissionFile(practice, practiceSubmission)">
+                            {{practiceSubmission?.practiceName}} </a>
                     </span>
                     <span *ngIf="!practiceSubmission.corrected" class="col-md-10">
 
@@ -57,15 +65,16 @@
 
                             <div class="col-md-12" *ngIf="!practiceSubmission?.corrected">
                                 <label class="col-md-1">Rename: </label>
-                                <input class="col-md-3" type="text" #newName value="{{practiceSubmission?.practiceName}}">
+                                <input class="col-md-3" type="text" #newName
+                                    value="{{practiceSubmission?.practiceName}}">
                                 <input class="col-md-3" type="file" #itemFile>
                                 <label class="col-md-3">Uploaded: {{practiceSubmission?.originalName}}</label>
-                                <button class="ml-1 col-md-1" name="btnSave" (click)="savePracticeSubmission(newName.value, itemFile, i, j, practiceSubmission.isPresented)">
+                                <button class="ml-1 col-md-1" name="btnSave"
+                                    (click)="savePracticeSubmission(newName.value, itemFile, i, j, practiceSubmission.isPresented)">
                                     <span *ngIf="practiceSubmission?.isPresented">Modify</span>
                                     <span *ngIf="!practiceSubmission?.isPresented">Save </span>
                                 </button>
                             </div>
-
 
                         </span>
                     </span>
@@ -85,10 +94,15 @@
                 <input class="col-md-2" type="text" #itemName placeholder="Name:">
                 <input class="col-md-3" type="text" #itemType placeholder="Icon: (pdf, word, video...)">
                 <input class="col-md-4" type="file" #itemFile>
-                <button class="col-md-1" type="submit" (click)="createPractice(itemName.value, itemType.value, itemFile)">Create</button>
+                <button class="col-md-1" type="submit"
+                    (click)="createPractice(itemName.value, itemType.value, itemFile)">Create</button>
             </li>
         </div>
     </ul>
 
+    <div class="popup-message">
+        <ngb-alert *ngIf="succesAlert" type="success" (close)="closePopUp('succesAlert')">{{message}}</ngb-alert>
+        <ngb-alert *ngIf="dangerAlert" type="danger" (close)="closePopUp('dangerAlert')">{{message}}</ngb-alert>
+    </div>
 
 </div>
