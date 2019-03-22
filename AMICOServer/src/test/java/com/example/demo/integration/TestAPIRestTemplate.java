@@ -33,14 +33,14 @@ public class TestAPIRestTemplate extends ElasTestBase{
 
         if (sutHost == null) {
             sutUrl = "https://localhost:8443/";
-            profile_uri = sutUrl + "api/users/{user}";
         } else {
             sutPort = sutPort != null ? sutPort : "8080";
             sutProtocol = sutProtocol != null ? sutProtocol : "http";
 
-            sutUrl = sutProtocol + "://" + sutHost + ":" + sutPort;
+            sutUrl = sutProtocol + "://" + sutHost + ":" + sutPort + "/";
         }
         
+        profile_uri = sutUrl + "api/users/{user}";
         logger.info("Webapp URL: " + sutUrl);
     }
     

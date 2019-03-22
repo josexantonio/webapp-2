@@ -5,10 +5,10 @@ import 'rxjs/Rx';
 import {User} from '../model/user.model';
 import { LoginService } from '../login/login.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
+const URL = environment.URL + 'api/users';
 
-
-const URL = 'https://localhost:8443/api/users';
 @Injectable()
 export class UserService {
 

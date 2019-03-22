@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from './course.service';
 import { Skill } from '../model/skill.model';
-
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-skills',
@@ -14,6 +14,8 @@ export class SkillsComponent implements OnInit {
 
   skills: Skill[];
   courseID: number;
+  url: string = environment.URL;
+  
   constructor(private router: Router, private courseService: CourseService, private activatedRoute: ActivatedRoute) {
 
   }
