@@ -5,7 +5,7 @@
     <a class="navbar-brand js-scroll-trigger" >
       <span class="d-block d-lg-none">Start Bootstrap</span>
       <span class="d-none d-lg-block">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src='{{URL}}/profileimg/{{user?.internalName}}' alt="profileImg">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src='{{URL}}profileimg/{{user?.internalName}}' alt="profileImg">
       </span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarResponsive" aria-controls="navbarResponsive"
@@ -68,7 +68,7 @@
                 <!-- Image -->
          <a [routerLink]="['/course-overview', course?.internalName]" class = "col-xs-0 col-sm-3 col-lg-2">
                   <!-- <img  class="course-img img-fluid rounded-circle" src="../../../assets/img/courses/{{course.courseID}}/course-{{course.courseID}}.jpg" alt="Course Photo" > -->
-           <img class="course-img img-fluid rounded-circle" src="{{imageURL}}/courses/img/{{course.courseID}}" alt=" Course photo">
+           <img class="course-img img-fluid rounded-circle" src="{{URL}}courses/img/{{course.courseID}}" alt=" Course photo">
                 </a>
                 <!-- Text -->
         <div class="offset-1 offset-md-0 col-lg-8 col-md-8 col-sm-10 col-10 ">
@@ -99,7 +99,7 @@
           <!-- Image -->
            <a class = "col-0 col-sm-3 col-lg-2">
                   <!-- <img  class="course-img img-fluid rounded-circle" src="../../../assets/img/courses/{{course?.courseID}}/course-{{course?.courseID}}.jpg" alt="Course Photo" > -->
-                  <img class="course-img img-fluid rounded-circle" src="{{imageURL}}/courses/img/{{course.courseID}}" alt=" Course photo">
+                  <img class="course-img img-fluid rounded-circle" src="{{URL}}courses/img/{{course.courseID}}" alt=" Course photo">
                 </a>
                 <!-- Text -->
           <div class="offset-1 offset-md-0 col-lg-7 col-md-7 col-sm-10 col-10 ">

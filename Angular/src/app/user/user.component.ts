@@ -17,8 +17,8 @@ export class UserComponent implements OnInit {
   user: User;
   image: File;
 
-  private URL;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public service: UserService, private loginService : LoginService) {
+  public URL;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public service: UserService, public loginService : LoginService) {
     this.internalName = this.activatedRoute.snapshot.params['internalName'];
     this.URL = environment.URL;
   }

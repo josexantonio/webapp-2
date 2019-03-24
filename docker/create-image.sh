@@ -13,11 +13,11 @@ name_image=$1
 
 echo "Compiling angular application"
 cd $path_project_angular
-npx ng build --base-href /new/
+npx ng build --prod --base-href /new/
 
 echo "Move angular application to java application"
 rm -R $path_project/src/main/resources/static/new/*
-cp -R dist/ $path_project/src/main/resources/static/new
+cp -R dist/* $path_project/src/main/resources/static/new
 
 echo "Compiling java application"
 cd $path_project

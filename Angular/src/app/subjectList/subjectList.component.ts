@@ -31,7 +31,7 @@ export class SubjectListComponent implements OnInit {
 
   URL: string;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private loginService: LoginService, private subjectListService: SubjectListService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService, public subjectListService: SubjectListService) {
     this.URL = environment.URL;
     this.courseName = activatedRoute.snapshot.params['courseName'];
     this.allTeachers = [];
