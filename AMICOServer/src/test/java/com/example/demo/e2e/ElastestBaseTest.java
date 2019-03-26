@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -72,6 +73,9 @@ public class ElastestBaseTest {
             } else {
                 driver = new FirefoxDriver();
             }
+            
+            //Change size browser in local selenium
+            driver.manage().window().setSize(new Dimension(1024, 1024));
         } else {
             DesiredCapabilities caps;
             if (browserType == null || browserType.equals(CHROME)) {
