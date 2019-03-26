@@ -29,7 +29,7 @@ export class IndexPageComponent implements OnInit {
   emptyContent: boolean;
 
 
-  constructor(private router: Router,  private loginService: LoginService, private courseService: CourseService, activatedRoute: ActivatedRoute) {
+  constructor(private router: Router,  public loginService: LoginService, public courseService: CourseService, public activatedRoute: ActivatedRoute) {
 
     this.URL = environment.URL;
   }

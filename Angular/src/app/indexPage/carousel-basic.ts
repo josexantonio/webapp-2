@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Component({selector: 'ngbd-carousel-basic', templateUrl: './carousel-basic.html', styles: [`
     /deep/ .imgCourse{
@@ -48,10 +49,10 @@ export class NgbdCarouselBasic implements OnInit {
 
   ngOnInit() {
     this.images = new Array();
-    // this.images.push('../../../assets/img/05.png');
-    // this.images.push('../../../assets/img/urjc.png');
-    // this.images.push('../../../assets/img/06.png');
-    this.images.push('https://localhost:8443/img/05.png');
-    this.images.push('https://localhost:8443/img/urjc.png');
-    this.images.push('https://localhost:8443/img/06.png');
+
+    let url = environment.URL;
+
+    this.images.push(url + 'img/05.png');
+    this.images.push(url + 'img/urjc.png');
+    this.images.push(url + 'img/06.png');
   }}
