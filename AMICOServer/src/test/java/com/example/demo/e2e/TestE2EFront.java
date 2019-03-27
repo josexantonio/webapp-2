@@ -134,6 +134,17 @@ public class TestE2EFront extends ElastestBaseTest {
 	 * 
 	 * // Check download sleep(500); checkDownloadFile(); }
 	 */
+	
+	@Test
+	public void checkShowProfile() {
+		//Go to profile 
+		goToPage("users/amico/profile");
+		
+		//Check if not show profile
+		WebElement errorPage = driver.findElement(By.tagName("h2"));
+		assertThat("Failed test, show profile when it shouldn't be seen", errorPage.getText(), IsEqualIgnoringCase.equalToIgnoringCase("404"));
+		log.info("The profile not show correctly");
+	}
 
 	public void loginUser(String name, String pass) {
 		// Wait show form login
