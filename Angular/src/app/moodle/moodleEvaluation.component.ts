@@ -35,7 +35,7 @@ export class MoodleEvaluationComponent implements OnInit {
   private hasMoreSubmissions: boolean[];
   private isLastPractice: boolean;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private loginService: LoginService, private moodleService: MoodleService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService, public moodleService: MoodleService) {
 
   }
 

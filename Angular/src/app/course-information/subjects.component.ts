@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from './course.service';
 import { User } from '../model/user.model';
 import { Subject } from '../model/subject.model';
-
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-subjects',
@@ -15,6 +15,7 @@ export class SubjectsComponent implements OnInit {
   user: User;
   subjects: Subject[];
   courseID: number;
+  url: string = environment.URL;
 
   constructor(private router: Router, private courseService: CourseService, private activatedRoute: ActivatedRoute) { }
 

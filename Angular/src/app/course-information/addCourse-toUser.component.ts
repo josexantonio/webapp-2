@@ -17,6 +17,7 @@ export class AddCourseToUserComponent  implements OnInit {
   id: number;
   course: Course;
   imageURL: string;
+  url: string = environment.URL;
 
   constructor(private router: Router, private loginService: LoginService, private courseService: CourseService,
               private activatedRoute: ActivatedRoute) {

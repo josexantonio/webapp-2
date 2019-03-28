@@ -36,7 +36,7 @@ export class MoodleComponent implements AfterViewInit {
   @ViewChild(MoodleEvaluationComponent)  evaluationTab: MoodleEvaluationComponent;
   @ViewChild(MoodleProgressComponent) progressTab: MoodleProgressComponent;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private loginService: LoginService, private moodleService: MoodleService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService, public moodleService: MoodleService) {
     this.URL = environment.URL;
     this.courseName  =  activatedRoute.snapshot.params['courseName'];
     this.subjectName = activatedRoute.snapshot.params['subjectName'];

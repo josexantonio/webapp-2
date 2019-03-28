@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../model/course.model';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Skill } from '../model/skill.model';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from '../model/subject.model';
-import { Observable } from 'rxjs/Observable';
-import { Studyitem } from '../model/studyitem.model';
 import { Router } from '@angular/router';
-import { Practices } from '../model/practices.model';
-import { saveAs as importedSaveAs } from "file-saver";
-import { User } from '../model/user.model';
+import { environment } from '../../environments/environment';
 
-const URL = 'https://localhost:8443/api/';
+const URL = environment.URL + 'api/';
 
 @Injectable()
 export class SubjectListService {

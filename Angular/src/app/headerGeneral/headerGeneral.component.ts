@@ -15,7 +15,7 @@ import { LoginService } from '../login/login.service';
 
 export class HeaderGeneralComponent implements OnInit {
 
-  constructor(private loginService : LoginService, private router: Router){
+  constructor(public loginService : LoginService, private router: Router){
   }
 
   ngOnInit() {

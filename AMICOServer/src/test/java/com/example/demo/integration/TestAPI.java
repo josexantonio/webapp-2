@@ -1,4 +1,4 @@
-package com.example.demo.integration;
+ package com.example.demo.integration;
 
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.slf4j.LoggerFactory.getLogger;

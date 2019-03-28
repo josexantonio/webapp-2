@@ -5,10 +5,10 @@ import 'rxjs/Rx';
 import { User } from '../model/user.model';
 import { LoginService } from '../login/login.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
+const URL = environment.URL + 'api/users';
 
-
-const URL = 'https://localhost:8443/api/users';
 @Injectable()
 export class UserService {
 
@@ -27,7 +27,12 @@ export class UserService {
   }
 
   getUser(internal: string) {
-    return this.http.get(URL + '/' + internal, { withCredentials: true })
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+
+    return this.http.get(URL + '/' + internal, { withCredentials: true, headers })
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }
@@ -52,7 +57,12 @@ export class UserService {
     return this.newHttp.put<User>(reqUrl, formData, { withCredentials: true });
   }
   getImageProfile(internal: string) {
-    return this.http.get(URL + '/img/' + internal, { withCredentials: true })
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+
+    return this.http.get(URL + '/img/' + internal, { withCredentials: true, headers })
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }
