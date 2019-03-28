@@ -70,6 +70,8 @@ public class TestE2EFront extends ElastestBaseTest {
 			log.info("Impossible to find the image");
 			e.printStackTrace();
 		}
+		
+		sleep(2000);
 
 		submit.click();
 
@@ -93,7 +95,7 @@ public class TestE2EFront extends ElastestBaseTest {
 		buttonDeleteLastCourse.click();
 
 		// Wait remove course
-		sleep(500);
+		sleep(3000);
 
 		// Check if the course is deleted
 		lastCourse = getLastCourse();
@@ -139,6 +141,9 @@ public class TestE2EFront extends ElastestBaseTest {
 	public void checkShowProfile() {
 		//Go to profile 
 		goToPage("users/amico/profile");
+		
+		//Wait for load page
+		sleep(4000);
 		
 		//Check if not show profile
 		WebElement errorPage = driver.findElement(By.tagName("h2"));
