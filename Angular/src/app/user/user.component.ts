@@ -50,7 +50,7 @@ export class UserComponent implements OnInit {
         this.profileImage = this.URL + "profileimg/" + this.user.internalName;
       }
 
-      console.log("Loged user: \n" + JSON.stringify(this.user));
+      console.log("Loaded user in profile: \n" + JSON.stringify(this.user));
     },
       error => console.log(error));
 

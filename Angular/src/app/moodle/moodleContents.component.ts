@@ -66,7 +66,7 @@ export class MoodleContentsComponent {
   }
 
   getStudyItemFile(studyItem: Studyitem) {
-
+    console.log("Download lesson: " + studyItem.name);
     this.moodleService.downloadFile(this.courseName, this.subjectName, studyItem);
 
   }

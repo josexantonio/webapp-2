@@ -43,6 +43,7 @@ export class AdminCourseComponent {
     };
     this.courseService.createCourse(course).subscribe(
       course => {
+        console.log("Created course correctly");
         if (photo.files[0]) {
           this.courseService.uploadImage(course.courseID, photo.files[0]).subscribe(
             res =>this.router.navigate(['/admin']),

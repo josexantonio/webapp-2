@@ -57,8 +57,6 @@ export class MoodleProgressComponent implements OnInit {
   }
 
   getChartData() {
-
-    console.log(this.chartData);
     this.moodleService.getChartData(this.courseName, this.subjectName).subscribe(
       res => {
         let practicesLabels = [];
