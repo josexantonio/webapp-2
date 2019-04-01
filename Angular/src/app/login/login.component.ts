@@ -17,7 +17,7 @@ export class LoginComponent {
 
     this.loginService.logIn(user, pass).subscribe(
       u => {
-        console.log(u);
+        console.log("Logged succesfuly " + user);
         this.router.navigate(['/index']);
       }, error => alert('Invalid user or password'));
   }

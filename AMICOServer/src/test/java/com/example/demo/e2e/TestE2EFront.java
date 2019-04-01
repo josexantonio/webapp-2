@@ -7,17 +7,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.hamcrest.text.IsEqualIgnoringCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -63,14 +61,14 @@ public class TestE2EFront extends ElastestBaseTest {
 		newType.sendKeys("test");
 		newSkill.sendKeys("test");
 		newDescription.sendKeys("test");
-		
+
 		try {
 			image.sendKeys(imageUpload);
 		} catch (Exception e) {
 			log.info("Impossible to find the image");
 			e.printStackTrace();
 		}
-		
+
 		sleep(2000);
 
 		submit.click();
@@ -104,50 +102,63 @@ public class TestE2EFront extends ElastestBaseTest {
 
 		assertThat("Failed deleting course", nameLastCourse, not(IsEqualIgnoringCase.equalToIgnoringCase("test")));
 		log.info("Course deleted correctly");
-		
-		//Logout
+
+		// Logout
 		this.goToPage();
 		this.logout();
 	}
 
-	/*
-	 * @Test public void checkDownload(TestInfo testInfo) { // Login
-	 * goToPage("login"); loginUser("amico", "pass");
-	 * 
-	 * // Profile goToPage("users/amico/profile");
-	 * 
-	 * // Go to course WebElement inscribedCourses =
-	 * driver.findElement(By.id("inscribed-courses")); List<WebElement>
-	 * buttonsCourses = inscribedCourses.findElements(By.tagName("a")); WebElement
-	 * firstCourse = buttonsCourses.get(0); firstCourse.click();
-	 * 
-	 * // Go to first subject
-	 * waitUntil(ExpectedConditions.visibilityOfElementLocated(By.tagName("section")
-	 * ), "Failed opening course", 2); WebElement subjects =
-	 * driver.findElement(By.tagName("section")); List<WebElement> buttonsSubjects =
-	 * subjects.findElements(By.tagName("a")); WebElement firstSubject =
-	 * buttonsSubjects.get(0); firstSubject.click();
-	 * 
-	 * // Download
-	 * waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className(
-	 * "container-fluid")), "Failed opening subject", 2); List<WebElement> files =
-	 * driver.findElements(By.className("item-content")); WebElement firstFile =
-	 * files.get(0); firstFile.click();
-	 * 
-	 * // Check download sleep(500); checkDownloadFile(); }
-	 */
-	
+	@Test
+	public void checkDownload(TestInfo testInfo) { // Login
+		goToPage("login");
+		loginUser("amico", "pass");
+
+		// Profile
+		goToPage("users/amico/profile");
+
+		// Go to course
+		WebElement inscribedCourses = driver.findElement(By.id("inscribed-courses"));
+		List<WebElement> buttonsCourses = inscribedCourses.findElements(By.tagName("a"));
+		WebElement firstCourse = buttonsCourses.get(0);
+		firstCourse.click();
+
+		sleep(2000);
+
+		// Go to first subject
+		waitUntil(ExpectedConditions.visibilityOfElementLocated(By.tagName("section")), "Failed opening course", 2);
+		WebElement subjects = driver.findElement(By.tagName("section"));
+		List<WebElement> buttonsSubjects = subjects.findElements(By.tagName("a"));
+		WebElement firstSubject = buttonsSubjects.get(0);
+		firstSubject.click();
+
+		// Download
+		waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className("container-fluid")),
+				"Failed opening subject", 2);
+		List<WebElement> files = driver.findElements(By.className("item-content"));
+		WebElement firstFile = files.get(0);
+		firstFile.click();
+
+		// Check download
+		sleep(2000);
+		checkDownloadFile();
+		
+		// Logout
+		this.goToPage();
+		this.logout();
+	}
+
 	@Test
 	public void checkShowProfile() {
-		//Go to profile 
+		// Go to profile
 		goToPage("users/amico/profile");
-		
-		//Wait for load page
+
+		// Wait for load page
 		sleep(4000);
-		
-		//Check if not show profile
+
+		// Check if not show profile
 		WebElement errorPage = driver.findElement(By.tagName("h2"));
-		assertThat("Failed test, show profile when it shouldn't be seen", errorPage.getText(), IsEqualIgnoringCase.equalToIgnoringCase("404"));
+		assertThat("Failed test, show profile when it shouldn't be seen", errorPage.getText(),
+				IsEqualIgnoringCase.equalToIgnoringCase("404"));
 		log.info("The profile not show correctly");
 	}
 
@@ -225,20 +236,15 @@ public class TestE2EFront extends ElastestBaseTest {
 	}
 
 	private void checkDownloadFile() {
-		File folder = new File(PATH_DOWNLOAD);
-		boolean found = false;
+		driver.get("chrome://downloads/");	
+		sleep(1000);
+		
+		waitUntil(ExpectedConditions.visibilityOfElementLocated(By.tagName("downloads-manager")), "test", 2);
+		WebElement downloads = (WebElement) ((JavascriptExecutor) driver).executeScript("return document.getElementsByTagName(\"downloads-manager\")[0].shadowRoot.getElementById(\"downloadsList\")");
+		List<WebElement> downloadItems = downloads.findElements(By.tagName("downloads-item"));
 
-		if (folder.exists() && folder.listFiles().length > 0) {
-			found = true;
-
-			try {
-				FileUtils.deleteDirectory(folder);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		assertThat("Download failed", true, is(found));
+		assertThat("Download failed", 1, is(downloadItems.size()));
+		log.info("Correct download lesson of course");
 	}
 
 	private WebElement getLastCourse() {

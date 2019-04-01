@@ -26,9 +26,15 @@ import com.example.demo.subject.SubjectRepository;
 import com.example.demo.user.SessionUserComponent;
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class CourseService {
+
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	public SessionUserComponent sessionUserComponent;
@@ -52,6 +58,7 @@ public class CourseService {
 		courseAux = courseRepository.findByName(course.getName());
 		if (courseAux == null) {
 			courseAux = course;
+			logger.info("Created Course:\n {}", object2json(courseAux));
 			courseRepository.save(courseAux);
 		}
 		return courseAux;
@@ -154,6 +161,9 @@ public class CourseService {
 		deletedCourse.getSkills().removeAll(deletedSkills);
 		skillRepository.delete(deletedSkills);
 		courseRepository.delete(deletedCourse);
+		
+		logger.info("Deleted Course:\n {}", object2json(courseAux));
+		
 		return courseAux;
 	}
 
@@ -176,6 +186,15 @@ public class CourseService {
 				"files/image/courses/" + course.getCourseID() + "/");
 		Path image = FILES_FOLDER.resolve("course-" + course.getCourseID() + ".jpg");
 		return image;
+	}
+	
+	public static String object2json(Course course) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(course);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
