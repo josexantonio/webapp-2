@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,32 +23,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.course.Course;
-import com.example.demo.course.CourseRepository;
 import com.example.demo.practices.Practices;
 import com.example.demo.practices.PracticesRepository;
 import com.example.demo.practices.PracticesService;
 import com.example.demo.studyItem.StudyItem;
-import com.example.demo.studyItem.StudyItem.Practice;
 import com.example.demo.studyItem.StudyItemRepository;
 import com.example.demo.studyItem.StudyItemService;
 import com.example.demo.subject.Subject;
-import com.example.demo.subject.SubjectRepository;
 import com.example.demo.subject.SubjectService;
 import com.example.demo.user.SessionUserComponent;
 import com.example.demo.user.User;
-import com.example.demo.user.UserRepository;
 import com.fasterxml.jackson.annotation.JsonView;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 public class MoodleRestController {
+	
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private CourseRepository courseRepository;
-	@Autowired
 	private StudyItemRepository studyItemRepository;
-	@Autowired
-	private UserRepository userRepository;
 	@Autowired
 	private PracticesRepository practiceSubmissionRepository;
 
@@ -223,6 +218,9 @@ public class MoodleRestController {
 								"attachment; filename = " + studyItem.getOriginalName());
 						response.setContentType("application/octet-stream");
 						response.setContentLength((int) pathFile.toFile().length());
+						
+						logger.info("Downloading lesson: {}", studyItem.getOriginalName());
+						
 						IOUtils.copy(Files.newInputStream(pathFile), response.getOutputStream());
 
 					} catch (IOException e) {

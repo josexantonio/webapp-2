@@ -105,7 +105,6 @@ export class SubjectListComponent implements OnInit {
   getTeachers(page: number) {
     this.subjectListService.getTeachers(page).subscribe(
       res => {
-        console.log(this.allTeachers);
         res['content'].forEach(teacher => {
           if (!teacher.roles.includes("ROLE_ADMIN")) {
             this.allTeachers.push(teacher);

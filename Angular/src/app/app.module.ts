@@ -35,24 +35,19 @@ import { UserUpdateComponent } from './user/user-update.component';
 import { ErrorPage } from './error/errorPage.component';
 import { AdminHeaderComponent } from './admin/adminHeader.component';
 import { AdminTablesComponent } from './admin/adminTables.component';
-import {AdminTeacherComponent} from './admin/adminTeacher.component';
-import {AdminCourseComponent} from './admin/adminCourse.component';
-import { XMLRequestInterceptor } from "./http-interceptor/xmlrequest-interceptor";
+import { AdminTeacherComponent } from './admin/adminTeacher.component';
+import { AdminCourseComponent } from './admin/adminCourse.component';
 
-@NgModule({declarations: [AppComponent, FooterComponent, OneCourseComponent,
-                          SkillsComponent, SubjectsComponent, IndexPageComponent, HeaderGeneralComponent,
-                          CourseIndexComponent, LoginComponent, MoodleComponent, ErrorPage, MoodleContentsComponent,
-                          AddCourseToUserComponent, SignupComponent, MoodleEvaluationComponent, MoodleProgressComponent,
-                          NgbdCarouselBasic, SubjectListComponent, UserComponent, UserUpdateComponent, AdminHeaderComponent,
-                          AdminTablesComponent, AdminCourseComponent, AdminTeacherComponent],
-  imports: [BrowserModule, routing, HttpClientModule,  HttpModule  , NgbModule.forRoot(), AngularFontAwesomeModule, ChartsModule,
+@NgModule({
+  declarations: [AppComponent, FooterComponent, OneCourseComponent,
+    SkillsComponent, SubjectsComponent, IndexPageComponent, HeaderGeneralComponent,
+    CourseIndexComponent, LoginComponent, MoodleComponent, ErrorPage, MoodleContentsComponent,
+    AddCourseToUserComponent, SignupComponent, MoodleEvaluationComponent, MoodleProgressComponent,
+    NgbdCarouselBasic, SubjectListComponent, UserComponent, UserUpdateComponent, AdminHeaderComponent,
+    AdminTablesComponent, AdminCourseComponent, AdminTeacherComponent],
+  imports: [BrowserModule, routing, HttpClientModule, HttpModule, NgbModule.forRoot(), AngularFontAwesomeModule, ChartsModule,
     FormsModule],
-  providers: [CourseService, LoginService, MoodleService, UserService, SubjectListService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: XMLRequestInterceptor,
-      multi: true,
-    }],
+  providers: [CourseService, LoginService, MoodleService, UserService, SubjectListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,8 +16,9 @@ export class UserComponent implements OnInit {
   user: User;
   image: File;
 
+  public profileImage = "";
   public URL;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public service: UserService, public loginService : LoginService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public service: UserService, public loginService: LoginService) {
     this.internalName = this.activatedRoute.snapshot.params['internalName'];
     this.URL = environment.URL;
   }
@@ -39,9 +40,18 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.loginService.isLoggedFunc().subscribe(
       res => { },
+      error => this.loginService.errorHandler(error),
     );
 
-    this.service.getUser(this.internalName).subscribe(user => { this.user = user, console.log(this.user); },
+    this.service.getUser(this.internalName).subscribe(user => {
+      this.user = user;
+
+      if(this.user.urlProfileImage !== null){
+        this.profileImage = this.URL + "profileimg/" + this.user.internalName;
+      }
+
+      console.log("Loged user: \n" + JSON.stringify(this.user));
+    },
       error => console.log(error));
 
   }
