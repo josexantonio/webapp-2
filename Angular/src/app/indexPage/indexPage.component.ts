@@ -38,7 +38,6 @@ export class IndexPageComponent implements OnInit {
     this.courseService.getTypes().subscribe(
       response => {
         this.allTypes = response;
-        console.log(this.allTypes);
       },
       error => console.log(error),
     );
@@ -60,7 +59,6 @@ export class IndexPageComponent implements OnInit {
         this.images.concat('../../../../FRONT/img/06.png');
         this.allTypes = new Array();
         this.initTypes();
-        console.log(this.allTypes);
       },
       error => console.log(error),
     );

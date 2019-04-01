@@ -88,7 +88,10 @@ export class AdminTablesComponent implements OnInit {
 
   deleteCourse(internalName: string){
     this.courseService.deleteCourse(internalName).subscribe(
-        res => this.updateCoursePage(this.page),
+        res => {
+          console.log("Deleted course correctly");
+          this.updateCoursePage(this.page);
+        },
           error => console.log(error)
     );
   }

@@ -46,6 +46,7 @@ export class CourseService {
   }
 
   deleteCourse(internalName: string) {
+    console.log("Request DELETE course: " + internalName);
     let reqUrl = URL + 'name/' + internalName+'/';
     return this.http.delete(reqUrl, {withCredentials: true});
   }
@@ -55,6 +56,7 @@ export class CourseService {
   }
 
   createCourse(course: Course){
+    console.log("Request POST course: " + course.name);
     return this.http.post<Course>(URL, course, { withCredentials: true });
   }
 
