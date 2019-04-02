@@ -3,9 +3,9 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import { User } from '../model/user.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
-const URL = 'https://localhost:8443/api';
-
+const URL = environment.URL + 'api';
 
 @Injectable()
 export class LoginService {

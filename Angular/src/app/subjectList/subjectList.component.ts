@@ -31,7 +31,7 @@ export class SubjectListComponent implements OnInit {
 
   URL: string;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private loginService: LoginService, private subjectListService: SubjectListService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService, public subjectListService: SubjectListService) {
     this.URL = environment.URL;
     this.courseName = activatedRoute.snapshot.params['courseName'];
     this.allTeachers = [];
@@ -103,7 +103,6 @@ export class SubjectListComponent implements OnInit {
   getTeachers(page: number) {
     this.subjectListService.getTeachers(page).subscribe(
       res => {
-        console.log(this.allTeachers);
         res['content'].forEach(teacher => {
           if (!teacher.roles.includes("ROLE_ADMIN")) {
             this.allTeachers.push(teacher);

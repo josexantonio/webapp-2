@@ -1,1 +1,0 @@
-powershell.exe "& .\create_image.ps1"

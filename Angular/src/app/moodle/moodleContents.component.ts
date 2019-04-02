@@ -17,7 +17,7 @@ export class MoodleContentsComponent {
   @Input()
   private courseName: string;
 
-  private  modules: number[];
+  public modules: number[];
   private studyItems: Studyitem[][];
   private studyItemsPage: number[];
   private studyItemsisLast: boolean[];
@@ -26,7 +26,7 @@ export class MoodleContentsComponent {
   @Output()
   refreshSubject = new EventEmitter<any>();
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private loginService: LoginService, private moodleService: MoodleService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService, public moodleService: MoodleService) {
     this.modules = Array(1).fill(0);
     this.studyItems = Array(1);
     this.studyItemsPage = Array(1).fill(0);
@@ -55,7 +55,7 @@ export class MoodleContentsComponent {
   }
 
   getStudyItemFile(studyItem: Studyitem) {
-
+    console.log("Download lesson: " + studyItem.name);
     this.moodleService.downloadFile(this.courseName, this.subjectName, studyItem);
 
   }

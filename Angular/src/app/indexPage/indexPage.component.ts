@@ -29,7 +29,7 @@ export class IndexPageComponent implements OnInit {
   emptyContent: boolean;
 
 
-  constructor(private router: Router,  private loginService: LoginService, private courseService: CourseService, activatedRoute: ActivatedRoute) {
+  constructor(private router: Router,  public loginService: LoginService, public courseService: CourseService, public activatedRoute: ActivatedRoute) {
 
     this.URL = environment.URL;
   }
@@ -38,7 +38,6 @@ export class IndexPageComponent implements OnInit {
     this.courseService.getTypes().subscribe(
       response => {
         this.allTypes = response;
-        console.log(this.allTypes);
       },
       error => console.log(error),
     );
@@ -60,7 +59,6 @@ export class IndexPageComponent implements OnInit {
         this.images.concat('../../../../FRONT/img/06.png');
         this.allTypes = new Array();
         this.initTypes();
-        console.log(this.allTypes);
       },
       error => console.log(error),
     );

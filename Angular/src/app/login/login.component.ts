@@ -9,7 +9,7 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(public loginService: LoginService, private router: Router) { }
 
   logIn(event: any, user: string, pass: string) {
 
@@ -17,7 +17,7 @@ export class LoginComponent {
 
     this.loginService.logIn(user, pass).subscribe(
       u => {
-        console.log(u);
+        console.log("Logged succesfuly " + user);
         this.router.navigate(['/index']);
       }, error => alert('Invalid user or password'));
   }

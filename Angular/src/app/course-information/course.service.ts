@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import {Skill} from '../model/skill.model';
 import {Subject} from '../model/subject.model';
 import { Observable } from 'rxjs/Observable';
-import {Studyitem} from '../model/studyitem.model';
+import { environment } from '../../environments/environment';
 
-const URL = 'https://localhost:8443/api/courses/';
+const URL = environment.URL + 'api/courses/';
 
 @Injectable()
 export class CourseService {
@@ -46,6 +46,7 @@ export class CourseService {
   }
 
   deleteCourse(internalName: string) {
+    console.log("Request DELETE course: " + internalName);
     let reqUrl = URL + 'name/' + internalName+'/';
     return this.http.delete(reqUrl, {withCredentials: true});
   }
@@ -55,6 +56,7 @@ export class CourseService {
   }
 
   createCourse(course: Course){
+    console.log("Request POST course: " + course.name);
     return this.http.post<Course>(URL, course, { withCredentials: true });
   }
 
