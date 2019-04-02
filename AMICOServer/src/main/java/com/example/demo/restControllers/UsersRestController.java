@@ -8,6 +8,8 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +37,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 public class UsersRestController {
+
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserRepository repository;
@@ -168,9 +172,10 @@ public class UsersRestController {
 	public User findUser(@PathVariable String userInternalName) {
 
 		User user = repository.findByInternalName(userInternalName);
-		if (user != null)
+		if (user != null) {
+			logger.info("Getting user: " + user.getUsername());
 			return user;
-		else
+		} else
 			return null;
 	}
 
