@@ -40,12 +40,12 @@ public class ElastestBaseTest {
         String sutProtocol = System.getenv("ET_SUT_PROTOCOL");
 
         if (sutHost == null) {
-            sutUrl = "https://localhost:8443/";
+            sutUrl = "http://localhost:4200/";
         } else {
             sutPort = sutPort != null ? sutPort : "8080";
             sutProtocol = sutProtocol != null ? sutProtocol : "http";
 
-            sutUrl = sutProtocol + "://" + sutHost + ":" + sutPort + "/";
+            sutUrl = sutProtocol + "://" + sutHost + ":" + sutPort + "/new/";
         }
         logger.info("Webapp URL: " + sutUrl);
 
