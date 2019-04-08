@@ -212,13 +212,13 @@ public class TestE2EFront extends ElastestBaseTest {
 	}
 
 	public void goToPage() {
-		String url = sutUrl + "new/";
+		String url = sutUrl;
 
 		this.driver.get(url);
 	}
 
 	public void goToPage(String page) {
-		String url = sutUrl + "new/";
+		String url = sutUrl;
 
 		this.driver.get(url + page);
 	}

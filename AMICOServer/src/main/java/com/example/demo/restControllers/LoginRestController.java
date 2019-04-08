@@ -34,7 +34,7 @@ public class LoginRestController {
 
 		if (!userComponent.isLoggedUser()) {
 			log.info("Not user logged");
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			User loggedUser = userComponent.getLoggedUser();
 			log.info("Logged as " + loggedUser.getInternalName());
@@ -47,7 +47,7 @@ public class LoginRestController {
 
 		if (!userComponent.isLoggedUser()) {
 			log.info("No user logged");
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			session.invalidate();
 			log.info("Logged out");
