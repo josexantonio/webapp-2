@@ -12,7 +12,7 @@ services:
     image: codeurjc/webapp-2-fixed-profile
     entrypoint: ["./wait-for-it.sh", "db:3306", "--", "java", "-jar", "webapp-2.java"]
     ports:
-      - 8443:8443
+      - 8000:8000
     depends_on:
       - db
     environment:
