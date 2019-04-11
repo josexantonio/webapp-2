@@ -42,6 +42,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logOut");
         http.logout().logoutSuccessUrl("/");
         
+        //H2 console
+		http.headers().frameOptions().disable();
+        
      // Disable CSRF protection (it is difficult to implement with ng2)
      	http.csrf().disable();
     }

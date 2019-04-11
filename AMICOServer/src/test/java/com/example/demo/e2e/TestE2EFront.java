@@ -131,10 +131,14 @@ public class TestE2EFront extends ElastestBaseTest {
 		WebElement firstSubject = buttonsSubjects.get(0);
 		firstSubject.click();
 
-		// Download
-		waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className("container-fluid")),
-				"Failed opening subject", 2);
-		List<WebElement> files = driver.findElements(By.className("item-content"));
+		sleep(2000);
+		
+		waitUntil(ExpectedConditions.visibilityOfElementLocated(By.className("tab-pane")),
+				"Failed opening subject", 12);
+		List<WebElement> tabs = driver.findElements(By.className("tab-pane"));
+		WebElement tab = tabs.get(0);
+		
+		List<WebElement> files = tab.findElements(By.className("item-content"));
 		WebElement firstFile = files.get(0);
 		firstFile.click();
 
