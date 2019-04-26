@@ -1,4 +1,4 @@
-package com.example.demo.integration;
+package com.example.demo.e2e.api;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
