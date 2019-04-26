@@ -1,4 +1,4 @@
-package com.example.demo.integration;
+package com.example.demo.e2e.api;
 
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.integration.SSLClientFactory.HttpClientType;
+import com.example.demo.e2e.api.SSLClientFactory.HttpClientType;
 
 public class TestAPIRestTemplate extends ElasTestBase{
 

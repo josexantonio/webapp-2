@@ -1,4 +1,4 @@
-package com.example.demo.integration;
+package com.example.demo.e2e.api;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
