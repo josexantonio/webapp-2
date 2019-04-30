@@ -18,10 +18,10 @@ export class MoodleContentsComponent {
   private courseName: string;
 
   public modules: number[];
-  private studyItems: Studyitem[][];
+  public studyItems: Studyitem[][];
   private studyItemsPage: number[];
   private studyItemsisLast: boolean[];
-  private typeFile: string = "";
+  public typeFile: string = "";
 
   @Output()
   refreshSubject = new EventEmitter<any>();
